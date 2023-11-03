@@ -23,7 +23,8 @@ export default class UpdateServico {
 
         let num = this.entrada.receberNumero(`Por favor informe o número do serviço a ser atualizado: `)
         let nome = this.entrada.receberTexto(`Por favor informe o novo nome do serviço: `)
-        this.servicos[num-1].nome = nome
+        let preco = this.entrada.receberNumero(`Por favor informe o novo preço do serviço: `)
+        this.servicos[num-1] = new Servico(nome,preco)
         console.log(`\n Atualização concluída :)\n`);
     }
 }

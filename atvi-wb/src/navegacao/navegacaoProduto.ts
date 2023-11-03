@@ -20,31 +20,30 @@ import CadastroProduto from "../negocio/cadastroProduto";
 import ListagemProdutos from "../negocio/listagemProdutos";
 import DeleteProduto from "../negocio/deleteProduto";
 import UpdateProduto from "../negocio/updateProduto";
+import AssociaProduto from "../negocio/associaProduto";
 
 export default class NavegacaoProduto {
     private empresa: Empresa
     private execucao: Boolean
 
-    constructor( empresa: Empresa)
-    {
+    constructor(empresa: Empresa) {
         this.empresa = empresa
         this.execucao = true
     }
 
-    public menu() : void
-    {
+    public menu(): void {
         while (this.execucao) {
             console.log(`\nOpções para Produtos:`);
             console.log(`1 - Cadastro de Produtos`);
             console.log(`2 - Listagem de Produtos`)
             console.log(`3 - Deletar Produto`)
             console.log(`4 - Atualizar Produto`)
-            console.log(`5 - Associar/Registrar Produto`)
+            console.log(`5 - Associar Produto`)
             console.log(`0 - Voltar`);
-        
+
             let entrada = new Entrada()
             let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
-        
+
             switch (opcao) {
                 case 1:
                     let cadastro = new CadastroProduto(this.empresa.getProdutos)
@@ -56,7 +55,7 @@ export default class NavegacaoProduto {
                     break;
 
                 case 3:
-                    let d = new DeleteProduto(this.empresa.getProdutos,this.empresa)
+                    let d = new DeleteProduto(this.empresa.getProdutos, this.empresa)
                     d.deletar()
                     break;
 
@@ -64,7 +63,12 @@ export default class NavegacaoProduto {
                     let u = new UpdateProduto(this.empresa)
                     u.update()
                     break;
-        
+
+                case 5:
+                    let a = new AssociaProduto(this.empresa)
+                    a.associar()
+                    break;
+
                 case 0:
                     this.execucao = false
                     console.log(`Retornando...`)

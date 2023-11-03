@@ -22,7 +22,8 @@ export default class UpdateProduto {
 
         let num = this.entrada.receberNumero(`Por favor informe o número do produto a ser atualizado: `)
         let nome = this.entrada.receberTexto(`Por favor informe o novo nome do produto: `)
-        this.produtos[num-1].nome = nome
+        let preco = this.entrada.receberNumero(`Por favor informe o novo preço do produto: `)
+        this.produtos[num-1] = new Produto(nome,preco)
         console.log(`\n Atualização concluída :)\n`);
     }
 }

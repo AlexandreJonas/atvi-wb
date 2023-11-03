@@ -7,15 +7,17 @@ import Telefone from "./telefone"
 export default class Cliente {
     public nome: string
     public nomeSocial: string
+    private sexo: string
     private cpf: CPF
     private rgs: Array<RG>
     private dataCadastro: Date
     private telefones: Array<Telefone>
     private produtosConsumidos: Array<Produto>
     private servicosConsumidos: Array<Servico>
-    constructor(nome: string, nomeSocial: string, cpf: CPF) {
+    constructor(nome: string, nomeSocial: string, sexo:string,cpf: CPF) {
         this.nome = nome
         this.nomeSocial = nomeSocial
+        this.sexo = sexo
         this.cpf = cpf
         this.rgs = []
         this.dataCadastro = new Date()
@@ -23,6 +25,11 @@ export default class Cliente {
         this.produtosConsumidos = []
         this.servicosConsumidos = []
     }
+
+    public get getSexo():string{
+        return this.sexo
+    }
+
     public get getCpf(): CPF {
         return this.cpf
     }
@@ -40,5 +47,37 @@ export default class Cliente {
     }
     public get getServicosConsumidos(): Array<Servico> {
         return this.servicosConsumidos
+    }
+
+    public setDataCadastro():void
+    {
+        this.dataCadastro = new Date();
+    }
+
+    public pushRG(RG:RG):void{
+        this.rgs.push(RG);
+    }
+
+    public pushTelefone(tel:Telefone):void{
+        this.telefones.push(tel);
+    }
+
+    public pushProduto(prd:Produto):void{
+        this.produtosConsumidos.push(prd);
+    }
+
+    public pushServico(ser:Servico):void{
+        this.servicosConsumidos.push(ser);
+    }
+
+    public getGasto(): number{
+        let cont = 0
+        this.getProdutosConsumidos.forEach(prd => {
+            cont += prd.preco;
+        })
+        this.getServicosConsumidos.forEach(ser => {
+            cont += ser.preco;
+        })
+        return cont;
     }
 }

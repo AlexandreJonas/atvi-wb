@@ -20,31 +20,30 @@ import CadastroServico from "../negocio/cadastroServico";
 import ListagemServicos from "../negocio/listagemServicos";
 import DeleteServico from "../negocio/deleteServico";
 import UpdateServico from "../negocio/updateServico";
+import AssociaServico from "../negocio/associaServico";
 
 export default class NavegacaoServico {
     private empresa: Empresa
     private execucao: Boolean
 
-    constructor( empresa: Empresa)
-    {
+    constructor(empresa: Empresa) {
         this.empresa = empresa
         this.execucao = true
     }
 
-    public menu() : void
-    {
+    public menu(): void {
         while (this.execucao) {
             console.log(`\nOpções para Serviços:`);
             console.log(`1 - Cadastro de Serviços`);
             console.log(`2 - Listagem de Serviços`)
             console.log(`3 - Deletar Serviço`)
             console.log(`4 - Atualizar Serviço`)
-            console.log(`5 - Associar/Registrar Serviço`)
+            console.log(`5 - Associar Serviço`)
             console.log(`0 - Voltar`);
-        
+
             let entrada = new Entrada()
             let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
-        
+
             switch (opcao) {
                 case 1:
                     let cadastro = new CadastroServico(this.empresa.getServicos)
@@ -56,13 +55,18 @@ export default class NavegacaoServico {
                     break;
 
                 case 3:
-                    let d = new DeleteServico(this.empresa.getServicos,this.empresa)
+                    let d = new DeleteServico(this.empresa.getServicos, this.empresa)
                     d.deletar()
                     break;
 
                 case 4:
                     let u = new UpdateServico(this.empresa)
                     u.update()
+                    break;
+
+                case 5:
+                    let a = new AssociaServico(this.empresa)
+                    a.associar()
                     break;
 
                 case 0:
